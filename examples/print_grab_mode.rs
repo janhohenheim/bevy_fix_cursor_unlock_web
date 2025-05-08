@@ -21,6 +21,7 @@ fn setup_text(mut commands: Commands) {
 
 fn print_grab_mode(window: Single<&Window, Changed<Window>>, mut text: Single<&mut Text>) {
     let grab_mode = window.cursor_options.grab_mode;
+    // Without this plugin, this would report `CursorGrabMode::Locked` even when the cursor is unlocked on Web.
     text.0 = format!("grab_mode: {:?}", grab_mode);
 }
 
