@@ -21,3 +21,5 @@ App::new()
 
 Now, `Window::cursor_options::grab_mode` is automatically set to `CursorGrabMode::None` for you when unlocking the cursor on web.  
 This fixes <https://github.com/bevyengine/bevy/issues/8949>
+
+It will also automatically forward the keyboard event for pressing `Escape`, which would be ignored otherwise.
