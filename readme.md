@@ -23,3 +23,9 @@ Now, `Window::cursor_options::grab_mode` is automatically set to `CursorGrabMode
 This fixes <https://github.com/bevyengine/bevy/issues/8949>
 
 It will also automatically forward the keyboard event for pressing `Escape`, which would be ignored otherwise.
+
+## Compatibility
+
+| bevy        | bevy_fix_cursor_unlock_web |
+|-------------|------------------------|
+| 0.16        | 0.1                    |
