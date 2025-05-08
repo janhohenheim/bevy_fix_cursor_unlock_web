@@ -1,0 +1,27 @@
+[package]
+name = "bevy_fix_cursor_unlock_web"
+version = "0.1.0"
+edition = "2024"
+authors = ["Jan Hohenheim <jan@hohenheim.ch>"]
+exclude = ["./assets/"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/janhohenheim/bevy_fix_cursor_unlock_web"
+description = "A tiny plugin that fixes Bevy not reporting when the cursor is unlocked on web"
+keywords = ["bevy", "cursor", "fix", "web"]
+categories = ["game-development"]
+
+[dependencies]
+bevy = { version = "0.16", default-features = false, features = [
+    "bevy_window",
+] }
+
+[target.wasm32-unknown-unknown.dependencies]
+web-sys = { version = "0.3.77", features = [
+    "Window",
+    "Document",
+    "Event",
+    "Element",
+] }
+
+[dev-dependencies]
+bevy = "0.16"
