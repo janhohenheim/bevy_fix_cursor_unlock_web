@@ -51,13 +51,18 @@ fn update_cursor_grab_status(
         return;
     };
     for (entity, mut window) in &mut windows {
-        window.cursor_options.grab_mode = if locked {
+        let new_state = if locked {
             CursorGrabMode::Locked
         } else {
-            keyboard_events.write(keyboard_input(entity, ButtonState::Pressed));
-            was_unlocked.0 = true;
             CursorGrabMode::None
         };
+        if window.cursor_options.grab_mode != new_state {
+            window.cursor_options.grab_mode = new_state;
+            if new_state == CursorGrabMode::None {
+                keyboard_events.write(keyboard_input(entity, ButtonState::Pressed));
+                was_unlocked.0 = true;
+            }
+        }
     }
 }
 

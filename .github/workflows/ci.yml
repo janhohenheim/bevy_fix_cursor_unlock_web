@@ -30,7 +30,7 @@ jobs:
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
       - name: Run cargo clippy
-        run: cargo clippy --tests --examples
+        run: cargo clippy --tests --examples --target wasm32-unknown-unknown
 
   format:
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
       - name: Run cargo doc
-        run: cargo doc --no-deps --all-features
+        run: cargo doc --no-deps --all-features --target wasm32-unknown-unknown
 
   test:
     runs-on: ubuntu-latest
@@ -84,6 +84,6 @@ jobs:
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
       - name: Run cargo test
-        run: cargo test --all-features --features bevy/x11 
+        run: cargo test --all-features --features bevy/x11  --target wasm32-unknown-unknown
       - name: Run doc tests
-        run: LD_LIBRARY_PATH="$(rustc --print target-libdir)" cargo test --doc --features bevy/x11
+        run: LD_LIBRARY_PATH="$(rustc --print target-libdir)" cargo test --doc --features bevy/x11 --target wasm32-unknown-unknown
