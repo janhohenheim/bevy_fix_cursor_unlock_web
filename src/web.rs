@@ -2,11 +2,11 @@ use std::sync::{LazyLock, Mutex};
 
 use bevy::{
     input::{
-        ButtonState, InputSystem,
+        ButtonState, InputSystems,
         keyboard::{Key, KeyboardInput, keyboard_input_system},
     },
     prelude::*,
-    window::CursorGrabMode,
+    window::{CursorGrabMode, CursorOptions},
 };
 use web_sys::wasm_bindgen::{JsCast as _, prelude::Closure};
 
@@ -18,7 +18,7 @@ pub(super) fn plugin(app: &mut App) {
         (release_virtual_escape_key, update_cursor_grab_status)
             .chain()
             .before(keyboard_input_system)
-            .in_set(InputSystem),
+            .in_set(InputSystems),
     );
 }
 
@@ -43,23 +43,23 @@ fn setup_pointer_lock_change_event_listener() {
 struct WasUnlockedFromWebInTheLastFrame(bool);
 
 fn update_cursor_grab_status(
-    mut windows: Query<(Entity, &mut Window)>,
-    mut keyboard_events: EventWriter<KeyboardInput>,
+    mut cursor_options: Query<(Entity, &mut CursorOptions)>,
+    mut keyboard_messages: MessageWriter<KeyboardInput>,
     mut was_unlocked: ResMut<WasUnlockedFromWebInTheLastFrame>,
 ) {
     let Some(locked) = POINTER_LOCKED.lock().unwrap().take() else {
         return;
     };
-    for (entity, mut window) in &mut windows {
+    for (entity, mut cursor_options) in &mut cursor_options {
         let new_state = if locked {
             CursorGrabMode::Locked
         } else {
             CursorGrabMode::None
         };
-        if window.cursor_options.grab_mode != new_state {
-            window.cursor_options.grab_mode = new_state;
+        if cursor_options.grab_mode != new_state {
+            cursor_options.grab_mode = new_state;
             if new_state == CursorGrabMode::None {
-                keyboard_events.write(keyboard_input(entity, ButtonState::Pressed));
+                keyboard_messages.write(keyboard_input(entity, ButtonState::Pressed));
                 was_unlocked.0 = true;
             }
         }
@@ -68,7 +68,7 @@ fn update_cursor_grab_status(
 
 fn release_virtual_escape_key(
     mut was_unlocked: ResMut<WasUnlockedFromWebInTheLastFrame>,
-    mut keyboard_events: EventWriter<KeyboardInput>,
+    mut keyboard_messages: MessageWriter<KeyboardInput>,
     windows: Query<Entity, With<Window>>,
 ) {
     if !was_unlocked.0 {
@@ -76,7 +76,7 @@ fn release_virtual_escape_key(
     }
     was_unlocked.0 = false;
     for entity in &windows {
-        keyboard_events.write(keyboard_input(entity, ButtonState::Released));
+        keyboard_messages.write(keyboard_input(entity, ButtonState::Released));
     }
 }
 
