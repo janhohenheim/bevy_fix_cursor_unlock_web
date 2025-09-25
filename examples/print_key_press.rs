@@ -3,7 +3,7 @@ use bevy::{
     prelude::*,
     window::{CursorGrabMode, CursorOptions},
 };
-use bevy_fix_cursor_unlock_web::FixPointerUnlockPlugin;
+use bevy_fix_cursor_unlock_web::{FixPointerUnlockPlugin, ForceUnlockCursor};
 
 fn main() {
     App::new()
@@ -15,19 +15,25 @@ fn main() {
             Update,
             lock_cursor.run_if(input_just_pressed(MouseButton::Left)),
         )
+        .add_observer(print_force_unlock)
         .run();
 }
 
 fn setup_text(mut commands: Commands) {
-    commands.spawn(Text::new("Please press the Escape key"));
+    commands.spawn(Text::new(
+        "Click to lock cursor, press any key to debug print it",
+    ));
     commands.spawn(Camera2d);
 }
 
 fn print_key_press(mut text: Single<&mut Text>, mut keyboard_input: MessageReader<KeyboardInput>) {
     for message in keyboard_input.read() {
-        // Without this plugin, this would not report the `Esc` key press used to unlock the cursor on Web.
         text.0 = format!("Keyboard input message: {message:#?}");
     }
+}
+
+fn print_force_unlock(_force_unlock: On<ForceUnlockCursor>, mut text: Single<&mut Text>) {
+    text.0 = format!("No keyboard event, but cursor was forced to unlock");
 }
 
 fn lock_cursor(mut cursor_options: Single<&mut CursorOptions>) {

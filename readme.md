@@ -22,7 +22,8 @@ App::new()
 Now, `Window::cursor_options::grab_mode` is automatically set to `CursorGrabMode::None` for you when unlocking the cursor on web.
 This fixes <https://github.com/bevyengine/bevy/issues/8949>
 
-It will also automatically forward the keyboard event for pressing `Escape`, which would be ignored otherwise.
+If you want to detect when a cursor was force freed, e.g. when the user presses escape, you can observe the `ForceUnlockCursor` event.
+Note that Bevy does *not* forward the "Escape" key press in this case.
 
 ## Compatibility
 

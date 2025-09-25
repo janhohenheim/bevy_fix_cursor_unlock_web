@@ -1,6 +1,6 @@
 [package]
 name = "bevy_fix_cursor_unlock_web"
-version = "0.2.0-rc.0"
+version = "0.2.0-rc.1"
 edition = "2024"
 authors = ["Jan Hohenheim <jan@hohenheim.ch>"]
 exclude = ["./assets/"]
@@ -11,9 +11,8 @@ keywords = ["bevy", "cursor", "fix", "web"]
 categories = ["game-development"]
 
 [dependencies]
-bevy = { version = "0.17.0-rc", default-features = false, features = [
-    "bevy_window",
-] }
+bevy_app = "0.17.0-rc"
+bevy_ecs = "0.17.0-rc"
 
 [target.wasm32-unknown-unknown.dependencies]
 web-sys = { version = "0.3.78", features = [
@@ -22,6 +21,7 @@ web-sys = { version = "0.3.78", features = [
     "Event",
     "Element",
 ] }
+bevy_window = "0.17.0-rc"
 
 [dev-dependencies]
 bevy = "0.17.0-rc"

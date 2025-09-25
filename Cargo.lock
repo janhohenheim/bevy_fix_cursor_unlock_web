@@ -662,9 +662,12 @@ dependencies = [
 
 [[package]]
 name = "bevy_fix_cursor_unlock_web"
-version = "0.2.0-rc.0"
+version = "0.2.0-rc.1"
 dependencies = [
  "bevy",
+ "bevy_app",
+ "bevy_ecs",
+ "bevy_window",
  "web-sys",
 ]
 

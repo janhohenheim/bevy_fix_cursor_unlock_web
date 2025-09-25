@@ -24,7 +24,7 @@ fn setup_text(mut commands: Commands) {
 }
 
 fn print_grab_mode(
-    cursor_options: Single<&CursorOptions, Changed<Window>>,
+    cursor_options: Single<&CursorOptions, Changed<CursorOptions>>,
     mut text: Single<&mut Text>,
 ) {
     let grab_mode = cursor_options.grab_mode;
