@@ -10,7 +10,7 @@ env:
   # Sparse cargo registry for faster updates
   CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
   RUSTFLAGS: "-D warnings"
-  RUSTDOCFLAGS: "--deny warnings"
+  RUSTDOCFLAGS: '--deny warnings --cfg getrandom_backend="wasm_js"'
 
 jobs:
   lint:
