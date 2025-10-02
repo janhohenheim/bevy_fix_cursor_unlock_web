@@ -3,14 +3,14 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 env:
   CARGO_TERM_COLOR: always
   # Sparse cargo registry for faster updates
   CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
   RUSTFLAGS: "-D warnings"
-  RUSTDOCFLAGS: '--deny warnings'
+  RUSTDOCFLAGS: "--deny warnings"
 
 jobs:
   lint:
@@ -18,15 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: 'true'
+          submodules: "true"
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
           components: clippy
+          targets: wasm32-unknown-unknown
       - name: Populate target directory from cache
-        uses: Swatinem/rust-cache@v2  
+        uses: Swatinem/rust-cache@v2
         with:
-          save-if: ${{ github.ref == 'refs/heads/main' }}  
+          save-if: ${{ github.ref == 'refs/heads/main' }}
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
       - name: Run cargo clippy
@@ -39,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: 'true'
+          submodules: "true"
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
@@ -51,18 +52,19 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUSTFLAGS: "-D warnings"
-      RUSTDOCFLAGS: '--deny warnings'
+      RUSTDOCFLAGS: "--deny warnings"
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: 'true'
+          submodules: "true"
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
+          targets: wasm32-unknown-unknown
       - name: Populate target directory from cache
-        uses: Swatinem/rust-cache@v2  
+        uses: Swatinem/rust-cache@v2
         with:
-          save-if: ${{ github.ref == 'refs/heads/main' }}  
+          save-if: ${{ github.ref == 'refs/heads/main' }}
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
       - name: Run cargo doc
@@ -73,14 +75,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: 'true'
+          submodules: "true"
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
+          targets: wasm32-unknown-unknown
       - name: Populate target directory from cache
-        uses: Swatinem/rust-cache@v2  
+        uses: Swatinem/rust-cache@v2
         with:
-          save-if: ${{ github.ref == 'refs/heads/main' }}  
+          save-if: ${{ github.ref == 'refs/heads/main' }}
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
       - name: Run cargo test
