@@ -12,7 +12,7 @@ pub mod prelude {
     pub use super::{FixPointerUnlockPlugin, ForceUnlockCursor};
 }
 
-/// A tiny plugin that updates all [`Window`]s' [`CursorOptions::grab_mode`](bevy::window::CursorOptions) when the pointer
+/// A tiny plugin that updates all [`Window`](bevy_window::Window)s' [`CursorOptions::grab_mode`](bevy_window::CursorOptions) when the pointer
 /// is unlocked on Web. This fixes <https://github.com/bevyengine/bevy/issues/8949>.
 /// Does nothing on other platforms.
 pub struct FixPointerUnlockPlugin;

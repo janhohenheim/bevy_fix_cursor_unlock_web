@@ -662,6 +662,7 @@ dependencies = [
  "bevy_app",
  "bevy_ecs",
  "bevy_window",
+ "getrandom",
  "web-sys",
 ]
 
