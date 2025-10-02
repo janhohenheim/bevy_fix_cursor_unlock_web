@@ -22,7 +22,7 @@ web-sys = { version = "0.3.78", features = [
     "Event",
     "Element",
 ] }
-getrandom = {version = "0.3", features = ["wasm_js"]}
 
 [dev-dependencies]
 bevy = "0.17.0"
+getrandom = { version = "0.3", features = ["wasm_js"] }
