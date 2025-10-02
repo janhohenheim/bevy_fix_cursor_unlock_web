@@ -33,7 +33,7 @@ fn print_key_press(mut text: Single<&mut Text>, mut keyboard_input: MessageReade
 }
 
 fn print_force_unlock(_force_unlock: On<ForceUnlockCursor>, mut text: Single<&mut Text>) {
-    text.0 = format!("No keyboard event, but cursor was forced to unlock");
+    text.0 = "No keyboard event, but cursor was forced to unlock".to_string();
 }
 
 fn lock_cursor(mut cursor_options: Single<&mut CursorOptions>) {
