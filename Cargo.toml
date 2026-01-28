@@ -11,12 +11,12 @@ keywords = ["bevy", "cursor", "fix", "web"]
 categories = ["game-development"]
 
 [dependencies]
-bevy_app = "0.17.0"
-bevy_ecs = "0.17.0"
-bevy_window = "0.17.0"
+bevy_app = "0.18.0"
+bevy_ecs = "0.18.0"
+bevy_window = "0.18.0"
 
 [target.wasm32-unknown-unknown.dependencies]
-web-sys = { version = "0.3.78", features = [
+web-sys = { version = "0.3.85", features = [
     "Window",
     "Document",
     "Event",
@@ -24,5 +24,5 @@ web-sys = { version = "0.3.78", features = [
 ] }
 
 [dev-dependencies]
-bevy = "0.17.0"
+bevy = "0.18.0"
 getrandom = { version = "0.3", features = ["wasm_js"] }
