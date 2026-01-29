@@ -87,6 +87,6 @@ jobs:
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
       - name: Run cargo test
-        run: cargo test --all-features --features bevy/x11  --target wasm32-unknown-unknown
+        run: cargo test --all-features --features bevy/x11 --lib --target wasm32-unknown-unknown
       - name: Run doc tests
         run: LD_LIBRARY_PATH="$(rustc --print target-libdir)" cargo test --doc --features bevy/x11 --target wasm32-unknown-unknown
