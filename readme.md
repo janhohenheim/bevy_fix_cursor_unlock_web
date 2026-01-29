@@ -29,6 +29,6 @@ Note that Bevy does *not* forward the "Escape" key press in this case.
 
 | bevy        | bevy_fix_cursor_unlock_web |
 |-------------|------------------------|
-| 0.18        | 0.4                    |
+| 0.18        | 0.3                    |
 | 0.17        | 0.2                    |
 | 0.16        | 0.1                    |
